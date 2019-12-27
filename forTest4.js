@@ -52,7 +52,7 @@ function convertToType (theKey) {
 console.log(eliminateDups(a)); */
 
 
-
+/* 
 // A bookseller has lots of books classified in 26 categories labeled A, B, ... Z. Each book has a code c of 3, 4, 5 or more capitals letters. The 1st letter of a code is the capital letter of the book category. In the bookseller's stocklist each code c is followed by a space and by a positive integer n (int n >= 0) which indicates the quantity of books of this code in stock.
 
 // You will be given a stocklist (e.g. : L) and a list of categories in capital letters. and your task is to find all the books of L with codes belonging to each category of M and to sum their quantity according to each category. 
@@ -67,4 +67,16 @@ art = ["ABAR 200", "CDXE 500", "BKWR 250", "BTSQ 890", "DRTY 600"];
 // cat = [];
 cat = ["A", "B", "K"];
 
-console.log(stockList(art, cat));
+console.log(stockList(art, cat)); */
+
+
+// In John's car the GPS records every s seconds the distance travelled from an origin (distances are measured in an arbitrary but consistent unit, x). For example, below is part of a record with s = 15:
+
+// One reduce will do it. done in PHP with traditional methods
+
+const gps = (s, x) => x.reduce((a, c, i, o) => Math.max(Math.floor((3600*(c-o[i ? i - 1 : 0]))/s), a), 0);
+
+x = [0.0, 0.19, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25];
+s = 15;
+
+console.log(gps(s,x));
