@@ -67,9 +67,10 @@ art = ["ABAR 200", "CDXE 500", "BKWR 250", "BTSQ 890", "DRTY 600"];
 // cat = [];
 cat = ["A", "B", "K"];
 
-console.log(stockList(art, cat)); */
+console.log(stockList(art, cat)); 
+*/
 
-
+/* 
 // In John's car the GPS records every s seconds the distance travelled from an origin (distances are measured in an arbitrary but consistent unit, x). For example, below is part of a record with s = 15:
 
 // One reduce will do it. done in PHP with traditional methods
@@ -80,3 +81,44 @@ x = [0.0, 0.19, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0, 2.25];
 s = 15;
 
 console.log(gps(s,x));
+ */
+
+
+ 
+// Gary likes pictures but he also likes words and reading. He has had a desire for a long time to see what words and books would look like if they could be seen as images.
+
+// For this task you are required to take a continuous string that can consist of any combination of words or characters and then convert the words that make up this string into hexadecimal values that could then be read as colour values.
+
+// A word is defined as a sequence of ASCII characters between two white space characters or the first or last word of a sequence of words.
+
+// Each word will represent a hexadecimal value by taking the first three letters of each word and find the ASCII character code for each character. This will then give you one hexadecimal value that represents the colours red, green or blue. You will then combine these values into one readable RGB hexadecimal value, ie, #ffffff.
+
+// If your word consists of less than 3 letters, you should use the hexidecimal value '00', ie "It" would return a value #497400.
+
+// Your answer should be an array of hexadecimal values that correspond to each word that made up your original string.
+
+const sample = "Hello, my name is Gary and I like cheese.";
+
+//One Liner...
+const wordsToHex = words => words.split(" ").map(word => word.slice(0,3).split("").reduce((a, c, i) => a.slice(0,i*2+1) + c.charCodeAt(0).toString(16) + a.slice(i*2+3,7),"#000000" ));
+    
+// more clear, longer solution
+
+function wordsToHex2(words) {
+    const wordArray = words.split(" ");
+    let result = [];
+    
+    for(let i = 0; i < wordArray.length; i++){
+        let temp = "#";
+        let loops = Math.min(wordArray[i].length, 3)
+        for(let j = 0; j < loops; j ++){
+            temp += wordArray[i].charCodeAt(j).toString(16);
+        }
+        result.push(temp.padEnd(7,"0"));
+    }
+    return result;
+}
+
+
+console.log(wordsToHex2(sample));
+console.log(wordsToHex(sample));
