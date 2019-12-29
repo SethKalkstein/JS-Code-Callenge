@@ -84,7 +84,7 @@ console.log(gps(s,x));
  */
 
 
- 
+/*  
 // Gary likes pictures but he also likes words and reading. He has had a desire for a long time to see what words and books would look like if they could be seen as images.
 
 // For this task you are required to take a continuous string that can consist of any combination of words or characters and then convert the words that make up this string into hexadecimal values that could then be read as colour values.
@@ -121,4 +121,23 @@ function wordsToHex2(words) {
 
 
 console.log(wordsToHex2(sample));
-console.log(wordsToHex(sample));
+console.log(wordsToHex(sample)); 
+
+*/
+
+// Given a number n, draw stairs using the letter "I", n tall and n wide, with the tallest in the top left.
+
+// For example n = 3 result in "I\n I\n I", or printed:
+
+function drawStairs2(n) {
+    result = "";
+    for(let i = 0; i < n; i++ ){
+        result += (i ? "\n" : "") + " ".repeat(i) +"I";
+    }
+    return result;
+  }
+
+const drawStairs = n => Array.from({length: n}).reduce( (a,c,i) => a += (i ? "\n" : "") + " ".repeat(i) +"I" ,"");
+
+  console.log(drawStairs(3));
+  console.log(drawStairs2(3));
