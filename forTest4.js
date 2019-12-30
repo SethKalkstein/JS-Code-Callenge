@@ -124,12 +124,13 @@ console.log(wordsToHex2(sample));
 console.log(wordsToHex(sample)); 
 
 */
-
+/* 
 // Given a number n, draw stairs using the letter "I", n tall and n wide, with the tallest in the top left.
 
-// For example n = 3 result in "I\n I\n I", or printed:
+// For example n = 3 result in "I\n I\n  I", or printed:
 
-function drawStairs2(n) {
+
+function drawStairs(n) {
     result = "";
     for(let i = 0; i < n; i++ ){
         result += (i ? "\n" : "") + " ".repeat(i) +"I";
@@ -137,7 +138,49 @@ function drawStairs2(n) {
     return result;
   }
 
-const drawStairs = n => Array.from({length: n}).reduce( (a,c,i) => a += (i ? "\n" : "") + " ".repeat(i) +"I" ,"");
+  function drawStairsO(n) {
+    result = "";
+    let spaces = ""; 
+    for(let i = 0; i < n; i++ ){
+        result += spaces + "I\n";
+        spaces += " ";
+    }
+    return result;
+  }
 
-  console.log(drawStairs(3));
-  console.log(drawStairs2(3));
+const drawStairs2 = n => Array.from({length: n}).reduce((a,c,i) => a += (i ? "\n" : "") + " ".repeat(i) +"I" ,"");
+
+const drawStairs3 = n => [...Array(n)].map((_, i) => "I".padStart(i + 1," ")).join("\n");
+
+const drawStairs4 = n => Array(n).fill("I").map((v, i) => " ".repeat(i) + v).join("\n");
+
+const drawStairs5 = n => Array(n).fill("I\n").reduce((a, c, i) => a += c.padStart(i + 2," "));
+
+  console.log(drawStairsO(3));
+  console.log(drawStairs5(5));
+
+   */
+
+//   In this kata, you will be given a string of text and valid parentheses, such as "h(el)lo". You must return the string, with only the text inside parentheses reversed, so "h(el)lo" becomes "h(le)lo". However, if said parenthesized text contains parenthesized text itself, then that too must reversed back, so it faces the original direction (parentheses included). Text like "h((el))l)o" becomes "'h(l(el))o'". This pattern should repeat for however many layers of parentheses.
+
+// reverseInParens("h(el)lo") == "h(le)lo";
+// reverseInParens("a ((d e) c b)") == "a (b c (d e))";
+// reverseInParens("one (two (three) four)") == "one (ruof (three) owt)";
+// reverseInParens("one (ruof ((rht)ee) owt)") == "one (two ((thr)ee) four)";
+
+//const sometext = "ME(OOOW)ME";
+
+const sometext = "ME(OO ff  (x(ab)f ) ff OW)ME";
+
+function reverseInParenstext (text = "Hello"){
+    textArray = text.split("");
+    textLength = textArray.length;
+    console.log(textLength);
+
+    // return textArray.indexOf("(");
+    return textArray.lastIndexOf(")");
+}
+
+var hello  = "WOrld";
+
+console.log(reverseInParenstext(sometext));
