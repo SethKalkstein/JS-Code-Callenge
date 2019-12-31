@@ -168,19 +168,79 @@ const drawStairs5 = n => Array(n).fill("I\n").reduce((a, c, i) => a += c.padStar
 // reverseInParens("one (two (three) four)") == "one (ruof (three) owt)";
 // reverseInParens("one (ruof ((rht)ee) owt)") == "one (two ((thr)ee) four)";
 
+
 //const sometext = "ME(OOOW)ME";
 
-const sometext = "ME(OO ff  (x(ab)f ) ff OW)ME";
-
-function reverseInParenstext (text = "Hello"){
-    textArray = text.split("");
-    textLength = textArray.length;
-    console.log(textLength);
-
-    // return textArray.indexOf("(");
-    return textArray.lastIndexOf(")");
-}
-
+const sometext = "Mt832r(OF fq  (x(adb)f ) yg DW)ME";
 var hello  = "WOrld";
 
-console.log(reverseInParenstext(sometext));
+//switch the parenthesis back, so they don't get flipped around
+const parensChecker = theChar => theChar === ")" ? "(" : theChar === "(" ? ")" : theChar;
+
+function findRightMatch(subArray){
+    let leftCount = 0;
+    let rightCount = 0;
+     //iterate through array until the right mate is found
+    for(let i = 0; i < subArray.length; i++){
+        //check for each type of paren
+        if(subArray[i] === "("){
+            leftCount ++;
+        }
+        if(subArray[i] === ")"){
+            rightCount ++;
+        }
+         //if the count is the same then a pair has been found
+        if(leftCount !== 0 && leftCount === rightCount){
+            //return right position
+            return i;
+        }
+    }
+        //if zero count on both then no parens left, if no right mate is found then there is an error
+    return -1;
+}
+
+function reverseInParens (text, stringStart = 0, stringFinish = text.length - 1){
+    let textArray = text.split("");
+    let openParen = textArray.indexOf("(", stringStart);
+
+    // let closeParen = textArray.lastIndexOf(")", stringFinish);
+    let closeParen = findRightMatch(textArray);
+    
+    let halfWay = (closeParen + openParen) / 2;
+
+    let leftHalf = [];
+    //slice everything after the right paren and send it back through the function
+    let rightHalf = "";
+
+    if(openParen === -1 || closeParen === -1){
+        return textArray.join("");
+    }
+    
+    else {
+        //push these to left half
+        for(let i = openParen + 1, j = closeParen - 1; i < halfWay ; i++, j--){
+            let temp = textArray[i];
+            textArray[i] = parensChecker(textArray[j]);
+            textArray[j] = parensChecker(temp);
+        }
+        //account for special case if middle letter is a paren, as middle character isn't switched on odd count loops
+        if(halfWay % 2 === 1){
+            textArray[halfWay] = parensChecker(textArray[halfWay]);
+        }
+        //concatenate the two halves in the return statement
+        //return reverseInParens(leftHalf.join("")) + reverseInParens(rightHalf)
+        return reverseInParens(textArray.join(""), openParen+1, closeParen - 1 )    
+    }
+
+}
+
+
+
+// console.log(reverseInParens(sometext));
+
+console.log(reverseInParens("h(el)lo") == "h(le)lo");
+console.log(reverseInParens("a ((d e) c b)") == "a (b c (d e))");
+// "many (snerap) on (pot)"
+// "many (top) on (parens)"
+console.log(reverseInParens("one (two (three) four)") == "one (ruof (three) owt)");
+console.log(reverseInParens("one (ruof ((rht)ee) owt)") == "one (two ((thr)ee) four)");
