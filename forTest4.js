@@ -161,6 +161,7 @@ const drawStairs5 = n => Array(n).fill("I\n").reduce((a, c, i) => a += c.padStar
 
    */
 
+//    lines 164 to 320 for following challenge
 //   In this kata, you will be given a string of text and valid parentheses, such as "h(el)lo". You must return the string, with only the text inside parentheses reversed, so "h(el)lo" becomes "h(le)lo". However, if said parenthesized text contains parenthesized text itself, then that too must reversed back, so it faces the original direction (parentheses included). Text like "h((el))l)o" becomes "'h(l(el))o'". This pattern should repeat for however many layers of parentheses.
 
 // reverseInParens("h(el)lo") == "h(le)lo";
