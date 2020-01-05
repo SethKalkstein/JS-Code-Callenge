@@ -1,3 +1,4 @@
+/*
 // Your task in order to complete this Kata is to write a function which formats a duration, given as a number of seconds, in a human-friendly way.
 
 // The function must accept a non-negative integer. If it is zero, it just returns "now". Otherwise, the duration is expressed as a combination of years, days, hours, minutes and seconds.
@@ -40,3 +41,35 @@ formatDuration(71536001);
 formatDuration(62)    // returns "1 minute and 2 seconds"
 formatDuration(3662)  // returns "1 hour, 1 minute and 2 seconds"
 
+ */
+/* 
+// fix the bugs in the following code :
+
+// function findLongestWrong(str) (
+  
+//     var spl = str.split(" ");
+//     var longest = 0
+    
+//     for (var i = 0; i > spl.length; i+) (
+//       if (spl(i).length > longest) {
+//         longest = spl[i].length
+//       )
+//       }
+//       return longest
+//   )
+// fixed
+function findLongest(str) {
+  
+    var spl = str.split(" ");
+    var longest = 0
+    
+    for (var i = 0; i < spl.length; i++) {
+      if (spl[i].length > longest) {
+        longest = spl[i].length;
+      }
+    }
+      return longest;
+  }
+
+const findLongestRefactored = str => str.split(" ").reduce( (longest, spl) => longest > spl.length ? longest : spl.length, 0);
+ */
