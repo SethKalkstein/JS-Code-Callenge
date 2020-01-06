@@ -73,6 +73,7 @@ function findLongest(str) {
 
 const findLongestRefactored = str => str.split(" ").reduce( (longest, spl) => longest > spl.length ? longest : spl.length, 0);
  */
+
 /* 
 // Complete the function, which calculates how much you need to tip based on the total amount of the bill and the service.
 
@@ -89,7 +90,9 @@ const findLongestRefactored = str => str.split(" ").reduce( (longest, spl) => lo
 //     "Rating not recognised" in Javascript, Python and Ruby...
 
 //almost works... if zero wasn't falsy I would be good!
-// const calculateTip = (amount, rating ) => Math.ceil([0,.05,.10,.15,.20][["terrible", "poor", "good", "great", "excellent"].indexOf(rating.toLowerCase())]*amount) || "Rating not recognised"
+const calculateTip1 = (amount, rating ) => Math.ceil([0,.05,.10,.15,.20][["terrible", "poor", "good", "great", "excellent"].indexOf(rating.toLowerCase())]*amount) || "Rating not recognised"
+
+const calculateTip3 = (amount, rating ) => (result => isNaN(result) ? "Rating not recognised" : result)(Math.ceil([0,.05,.10,.15,.20][["terrible", "poor", "good", "great", "excellent"].indexOf(rating.toLowerCase())]*amount));
 
 function calculateTip2 (amount, rating ) {
     let multiplier = 0;
@@ -112,10 +115,83 @@ function calculateTip2 (amount, rating ) {
         default:
             return "Rating not recognised";
     }
-    return Math.ceil(mulattiplier * amount);
+    return Math.ceil(multiplier * amount);
 }
 //someone else's code... nice! What I was trying to do above
-calculateTip = (amount, rating) => ((coefficient => coefficient >= 0 ? Math.ceil(amount * coefficient) : "Rating not recognised")(['terrible', 'poor', 'good', 'great', 'excellent'].indexOf(rating.toLowerCase()) / 20))
+calculateTip = (amount, rating) => (coefficient => coefficient >= 0 ? Math.ceil(amount * coefficient) : "Rating not recognised")(['terrible', 'poor', 'good', 'great', 'excellent'].indexOf(rating.toLowerCase()) / 20)
 
-// console.log(calculateTip(0, "terrible"));
+console.log(calculateTip3(0, "pookr"));
  */
+
+// funciton nesting and chaining practice
+
+// const someJawn = (x,y) => (z=> z > 10 ? "high" : "low")(x+y);
+
+// console.log(someJawn(10,3));
+// console.log((z=> z > 10 ? "high" : "low")(3))
+
+// (x=> {return (q=> q=="high" ? "HIGH" : (q=="low" ? "LOW" : "theres an error") )((z=> z > 10 ? "high" : "low")(x))})(11);
+
+// (z => {
+//     return z > 10 ? "high" : "low"
+// })(3);
+
+//     (q=>
+//         {
+//             return q=="high" ? "HIGH" : (q=="low" ? "LOW" : "theres an error") 
+//         })((z => 
+//             {
+//                 return z > 10 ? "high" : "low"
+//             })(3));
+
+// (x => 
+//     {   
+//         console.log("x is: " + x);
+//         return (q=>
+//             {   
+//                 console.log("q is: " + q);
+//                 return q=="high" ? "HIGH" : (q=="low" ? "LOW" : "theres an error"); 
+//             })((z => 
+//                 {  
+//                     console.log("z is: " + z); 
+//                     z += 3;
+//                     console.log("z is: " + z);
+//                     return z > 10 ? "high" : "low";
+//                 })(x +2))
+//     })(9);
+
+const nonAnom = (x => 
+    {   
+        console.log("x is: " + x);
+        return (q=>
+            {   
+                console.log("q is: " + q);
+                return q=="high" ? "HIGH" : (q=="low" ? "LOW" : "theres an error"); 
+            })((z => 
+                {  
+                    console.log("z is: " + z); 
+                    z += 3;
+                    console.log("z is: " + z);
+                    return z > 10 ? "high" : "low";
+                })(x +2))
+    })(9);
+
+console.log(nonAnom);
+
+const nonAnomPassArg = x => 
+    {   
+        console.log("x is: " + x);
+        return (q=>
+            {   
+                console.log("q is: " + q);
+                return q=="high" ? "HIGH" : (q=="low" ? "LOW" : "theres an error"); 
+            })((z => 
+                {  
+                    console.log("z is: " + z); 
+                    z += 3;
+                    console.log("z is: " + z);
+                    return z > 10 ? "high" : "low";
+                })(x +2))
+    };
+
+console.log(nonAnomPassArg(4));
