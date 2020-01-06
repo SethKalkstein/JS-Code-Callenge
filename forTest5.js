@@ -73,3 +73,49 @@ function findLongest(str) {
 
 const findLongestRefactored = str => str.split(" ").reduce( (longest, spl) => longest > spl.length ? longest : spl.length, 0);
  */
+/* 
+// Complete the function, which calculates how much you need to tip based on the total amount of the bill and the service.
+
+// You need to consider the following ratings:
+
+//     Terrible: tip 0%
+//     Poor: tip 5%
+//     Good: tip 10%
+//     Great: tip 15%
+//     Excellent: tip 20%
+
+// The rating is case insensitive (so "great" = "GREAT"). If an unrecognised rating is received, then you need to return:
+
+//     "Rating not recognised" in Javascript, Python and Ruby...
+
+//almost works... if zero wasn't falsy I would be good!
+// const calculateTip = (amount, rating ) => Math.ceil([0,.05,.10,.15,.20][["terrible", "poor", "good", "great", "excellent"].indexOf(rating.toLowerCase())]*amount) || "Rating not recognised"
+
+function calculateTip2 (amount, rating ) {
+    let multiplier = 0;
+    switch(rating.toLowerCase()){
+        case "terrible":
+           multiplier = 0;
+           break;
+        case "poor":
+            multiplier = .05;
+            break;
+        case "good":
+            multiplier = .10;
+            break;
+        case "great":
+            multiplier = .15;
+            break;
+        case "excellent":
+            multiplier = .20;
+            break;
+        default:
+            return "Rating not recognised";
+    }
+    return Math.ceil(mulattiplier * amount);
+}
+//someone else's code... nice! What I was trying to do above
+calculateTip = (amount, rating) => ((coefficient => coefficient >= 0 ? Math.ceil(amount * coefficient) : "Rating not recognised")(['terrible', 'poor', 'good', 'great', 'excellent'].indexOf(rating.toLowerCase()) / 20))
+
+// console.log(calculateTip(0, "terrible"));
+ */
