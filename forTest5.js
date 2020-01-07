@@ -73,6 +73,7 @@ function findLongest(str) {
 
 const findLongestRefactored = str => str.split(" ").reduce( (longest, spl) => longest > spl.length ? longest : spl.length, 0);
  */
+
 /* 
 // Complete the function, which calculates how much you need to tip based on the total amount of the bill and the service.
 
@@ -89,7 +90,11 @@ const findLongestRefactored = str => str.split(" ").reduce( (longest, spl) => lo
 //     "Rating not recognised" in Javascript, Python and Ruby...
 
 //almost works... if zero wasn't falsy I would be good!
-// const calculateTip = (amount, rating ) => Math.ceil([0,.05,.10,.15,.20][["terrible", "poor", "good", "great", "excellent"].indexOf(rating.toLowerCase())]*amount) || "Rating not recognised"
+const calculateTip1 = (amount, rating ) => Math.ceil([0,.05,.10,.15,.20][["terrible", "poor", "good", "great", "excellent"].indexOf(rating.toLowerCase())]*amount) || "Rating not recognised"
+
+//problem solved by passing the result of the calculation as a function that can discern falsy zero from NaN. Thanks to another code solver for the idea of using the result of the main function as a parameter of another anon function.
+
+const calculateTip3 = (amount, rating ) => (result => isNaN(result) ? "Rating not recognised" : result)(Math.ceil([0,.05,.10,.15,.20][["terrible", "poor", "good", "great", "excellent"].indexOf(rating.toLowerCase())]*amount));
 
 function calculateTip2 (amount, rating ) {
     let multiplier = 0;
@@ -112,10 +117,147 @@ function calculateTip2 (amount, rating ) {
         default:
             return "Rating not recognised";
     }
-    return Math.ceil(mulattiplier * amount);
+    return Math.ceil(multiplier * amount);
 }
 //someone else's code... nice! What I was trying to do above
-calculateTip = (amount, rating) => ((coefficient => coefficient >= 0 ? Math.ceil(amount * coefficient) : "Rating not recognised")(['terrible', 'poor', 'good', 'great', 'excellent'].indexOf(rating.toLowerCase()) / 20))
+calculateTip = (amount, rating) => (coefficient => coefficient >= 0 ? Math.ceil(amount * coefficient) : "Rating not recognised")(['terrible', 'poor', 'good', 'great', 'excellent'].indexOf(rating.toLowerCase()) / 20)
 
-// console.log(calculateTip(0, "terrible"));
+console.log(calculateTip3(0, "pookr"));
  */
+
+/* 
+// funciton nesting and chaining practice
+
+// const someJawn = (x,y) => (z=> z > 10 ? "high" : "low")(x+y);
+
+// console.log(someJawn(10,3));
+// console.log((z=> z > 10 ? "high" : "low")(3))
+
+// (x=> {return (q=> q=="high" ? "HIGH" : (q=="low" ? "LOW" : "theres an error") )((z=> z > 10 ? "high" : "low")(x))})(11);
+
+// (z => {
+//     return z > 10 ? "high" : "low"
+// })(3);
+
+//     (q=>
+//         {
+//             return q=="high" ? "HIGH" : (q=="low" ? "LOW" : "theres an error") 
+//         })((z => 
+//             {
+//                 return z > 10 ? "high" : "low"
+//             })(3));
+
+// (x => 
+//     {   
+//         console.log("x is: " + x);
+//         return (q=>
+//             {   
+//                 console.log("q is: " + q);
+//                 return q=="high" ? "HIGH" : (q=="low" ? "LOW" : "theres an error"); 
+//             })((z => 
+//                 {  
+//                     console.log("z is: " + z); 
+//                     z += 3;
+//                     console.log("z is: " + z);
+//                     return z > 10 ? "high" : "low";
+//                 })(x +2))
+//     })(9);
+
+const nonAnom = (x => 
+    {   
+        console.log("x is: " + x);
+        return (q=>
+            {   
+                console.log("q is: " + q);
+                return q=="high" ? "HIGH" : (q=="low" ? "LOW" : "theres an error"); 
+            })((z => 
+                {  
+                    console.log("z is: " + z); 
+                    z += 3;
+                    console.log("z is: " + z);
+                    return z > 10 ? "high" : "low";
+                })(x +2))
+    })(9);
+
+console.log(nonAnom);
+
+const nonAnomPassArg = x => 
+    {   
+        console.log("x is: " + x);
+        return (q=>
+            {   
+                console.log("q is: " + q);
+                return q=="high" ? "HIGH" : (q=="low" ? "LOW" : "theres an error"); 
+            })((z => 
+                {  
+                    console.log("z is: " + z); 
+                    z += 3;
+                    console.log("z is: " + z);
+                    return z > 10 ? "high" : "low";
+                })(x +2))
+    };
+
+console.log(nonAnomPassArg(4));
+ */
+
+// you will do addition and subtraction on a given string. The return value must be also a string.
+// "1plus2plus3plus4"  --> "10"
+// "1plus2plus3minus4" -->  "2"
+
+//Brute force first
+
+function simpleCalc(mathString){
+    const mathArray = mathString.split("");
+    let result = 0;
+    let tempNum = 0;
+    let addition = true;
+
+    for(let i = 0; i < mathArray.length; i++ ){
+        if(isNaN(mathArray[i])){
+            console.log(mathArray[i] + " is not a number");
+            result += tempNum*(addition ? 1 : -1);
+            if(mathArray[i] == "p"){
+                i += 3;
+                addition = true;
+            } else {
+                i += 4;
+                addition = false;
+            }
+            tempNum = 0;
+        } else {
+            console.log(mathArray[i] + " is a number");
+            tempNum = tempNum*10 + parseInt(mathArray[i]);
+            console.log(tempNum + "is the value of temp num")
+        }
+    }
+    return (result + tempNum*(addition ? 1 : -1)).toString();
+}
+
+function calculate(mathString){
+    const mathArray = mathString.split("");
+    let result = 0;
+    let tempNum = 0;
+    let addition = true;
+
+    for(let i = 0; i < mathArray.length; i++ ){
+        if(isNaN(mathArray[i])){
+            result += tempNum*(addition ? 1 : -1);
+            if(mathArray[i] == "p"){
+                i += 3;
+                addition = true;
+            } else {
+                i += 4;
+                addition = false;
+            }
+            tempNum = 0;
+        } else {
+            tempNum = tempNum*10 + parseInt(mathArray[i]);
+        }
+    }
+    return (result + tempNum*(addition ? 1 : -1)).toString();
+}
+
+const t1 = "15plus2plus3plus4";
+const t2 = "156plus29plus3minus4";
+
+console.log(simpleCalc(t2));
