@@ -199,7 +199,7 @@ const nonAnomPassArg = x =>
 
 console.log(nonAnomPassArg(4));
  */
-
+/* 
 // you will do addition and subtraction on a given string. The return value must be also a string.
 // "1plus2plus3plus4"  --> "10"
 // "1plus2plus3minus4" -->  "2"
@@ -261,3 +261,35 @@ const t1 = "15plus2plus3plus4";
 const t2 = "156plus29plus3minus4";
 
 console.log(simpleCalc(t2));
+ */
+
+// Let's make a function that returns a new object, containing all of the properties of any objects passed in as parameters.
+
+// The returned object should include the first instance of each property seen on any parameter object, and any other instance of that property should be ignored.
+
+// Also, if any parameter is not an object, it should be ignored. You can use the function isObject(object) to determine if a parameter is an object or not (it will return true or false).
+
+// extend( {a: 1, b: 2}, {c: 3} ) // should === {a: 1, b: 2, c: 3}
+// extend( {a: 1, b: 2}, {c: 3}, {d: 4} ) // should === {a: 1, b: 2, c: 3, d: 4}
+// extend( {a: 1, b: 2}, {a: 3, c: 3} ) // should  === {a: 1, b: 2, c: 3}
+// extend( {a: false, b: null}, {a: true, b: 2, c: 3} ) // should  === {a: false, b: null, c: 3}
+
+ function extend(...theArgs){
+    let result = {};
+    theArgs.forEach( obj => {
+        if(typeof(obj) == "object") {
+            for(const key in obj){
+                console.log(key, " key");
+                if(!(key in result)){
+                    result[key] = obj[key];
+                }
+            }
+        } 
+    });
+    return result;
+ }
+
+ console.log(extend( {a: 1, b: 2}, {c: 3} ));
+ console.log(extend( {a: 1, b: 2}, {a: 3, c: 3} ));
+ console.log(extend( {a: 1, b: 2}, {c: 3}, {d: 4} ));
+ console.log(extend( {a: false, b: null}, {a: true, b: 2, c: 3}, [1, 3, 4] ));
