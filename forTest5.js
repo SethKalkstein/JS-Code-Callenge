@@ -263,6 +263,7 @@ const t2 = "156plus29plus3minus4";
 console.log(simpleCalc(t2));
  */
 
+/* 
 // Let's make a function that returns a new object, containing all of the properties of any objects passed in as parameters.
 
 // The returned object should include the first instance of each property seen on any parameter object, and any other instance of that property should be ignored.
@@ -293,3 +294,19 @@ console.log(simpleCalc(t2));
  console.log(extend( {a: 1, b: 2}, {a: 3, c: 3} ));
  console.log(extend( {a: 1, b: 2}, {c: 3}, {d: 4} ));
  console.log(extend( {a: false, b: null}, {a: true, b: 2, c: 3}, [1, 3, 4] ));
+ */
+
+
+// Maximum Solution Length * 50 Characters *
+
+// You will be given an array (a) and a limit value (limit). You must check that all values in the array are below or equal to the limit value. If they are, return true. Else, return false.
+
+// You can assume all values in the array are numbers.
+
+// Do not use loops.
+
+//use as few characters as possible
+
+// smallEnough=(a,l)=>Math.max(...a)<=l
+smallEnough=(a,l)=>a.every(t=>t<=l)
+
