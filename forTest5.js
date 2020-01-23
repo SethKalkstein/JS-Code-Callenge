@@ -296,7 +296,7 @@ console.log(simpleCalc(t2));
  console.log(extend( {a: false, b: null}, {a: true, b: 2, c: 3}, [1, 3, 4] ));
  */
 
-
+/* 
 // Maximum Solution Length * 50 Characters *
 
 // You will be given an array (a) and a limit value (limit). You must check that all values in the array are below or equal to the limit value. If they are, return true. Else, return false.
@@ -310,3 +310,18 @@ console.log(simpleCalc(t2));
 // smallEnough=(a,l)=>Math.max(...a)<=l
 smallEnough=(a,l)=>a.every(t=>t<=l)
 
+ */
+
+// Return the number (count) of vowels in the given string.
+
+// We will consider a, e, i, o, and u as vowels for this Kata.
+
+// The input string will only consist of lower case letters and/or spaces.
+
+const getCount = str => str.split("").reduce((count, curr) => count += ['a', 'e', 'i', 'o', 'u'].indexOf(curr) !== -1 ? 1 : 0 ,0 );
+
+const getCount2 = str => (res => res ? res.length : 0)(str.match(/[aeiou]/g));
+const getCount3 = str => (str.match(/[aeiou]/g) || []).length;
+
+console.log(getCount3("abracadabra"));
+console.log(getCount3("my pyx"));
