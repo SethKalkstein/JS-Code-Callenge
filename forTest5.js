@@ -312,6 +312,8 @@ smallEnough=(a,l)=>a.every(t=>t<=l)
 
  */
 
+/* 
+
 // Return the number (count) of vowels in the given string.
 
 // We will consider a, e, i, o, and u as vowels for this Kata.
@@ -325,3 +327,33 @@ const getCount3 = str => (str.match(/[aeiou]/g) || []).length;
 
 console.log(getCount3("abracadabra"));
 console.log(getCount3("my pyx"));
+
+ */
+
+// In the following 6 digit number:
+
+// 283910
+
+// 91 is the greatest sequence of 2 consecutive digits.
+
+// In the following 10 digit number:
+
+// 1234567890
+
+// 67890 is the greatest sequence of 5 consecutive digits.
+
+// Complete the solution so that it returns the greatest sequence of five consecutive digits found within the number given. The number will be passed in as a string of only digits. It should return a five digit integer. The number passed may be as large as 1000 digits. 
+
+// OverKill Solution
+function solution(digits){
+    const consecutive = 5;
+    let digitArray = digits.toString().split("").map(val => parseInt(val));
+    let result = digitArray.slice(0,consecutive).reduce((acc, cur, ind)=> acc += cur*Math.pow(10, consecutive - ind-1),0);
+    for(let i = consecutive+1; i <= digitArray.length; i++){
+        let temp = digitArray.slice(i-consecutive, i).reduce((acc, cur, ind)=> acc += cur*Math.pow(10, consecutive - ind-1),0);
+        result = Math.max(result,temp);     
+    }
+    return result;
+}
+
+console.log(solution(12345678493219));
