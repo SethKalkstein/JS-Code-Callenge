@@ -329,7 +329,7 @@ console.log(getCount3("abracadabra"));
 console.log(getCount3("my pyx"));
 
  */
-
+/* 
 // In the following 6 digit number:
 
 // 283910
@@ -344,8 +344,20 @@ console.log(getCount3("my pyx"));
 
 // Complete the solution so that it returns the greatest sequence of five consecutive digits found within the number given. The number will be passed in as a string of only digits. It should return a five digit integer. The number passed may be as large as 1000 digits. 
 
-// OverKill Solution
-function solution(digits){
+//I like this one the best
+function solution1(digits){
+    const consecutive = 5;
+    let highest = 0;
+    for(let i = consecutive; i <= digits.length; i++){
+        highest = Math.max(highest, digits.slice(i-consecutive, i));
+    }
+    return highest;
+}
+//not particularly clear whats going on here, but writing it is fun!
+const solution2 = digits => digits.split("").reduce((acc, _, i, arr) =>acc = Math.max(acc, i+5 > arr.length ? 0 : arr.slice(i,i+5).join("") ) ,0);
+
+// OverKill Solution, not accounting for type casting, will take a number rather than a string
+function solution3(digits){
     const consecutive = 5;
     let digitArray = digits.toString().split("").map(val => parseInt(val));
     let result = digitArray.slice(0,consecutive).reduce((acc, cur, ind)=> acc += cur*Math.pow(10, consecutive - ind-1),0);
@@ -356,4 +368,19 @@ function solution(digits){
     return result;
 }
 
-console.log(solution(12345678493219));
+console.log(solution3("12345678493219"));
+ */
+
+
+// Balanced number is the number that * The sum of all digits to the left of the middle digit(s) and the sum of all digits to the right of the middle digit(s) are equal*.
+// Task
+
+// Given a number, Find if it is Balanced or not . 
+
+//done super fast as a pre bedtime fun activity for relaxation. Could be refactored but this is cool for now!
+function balancedNum(number)
+{
+    if(number < 100) return "Balanced";
+    let digitArray = number.toString().split("").map(val => parseInt(val));
+    return digitArray.slice(0, Math.ceil(digitArray.length/2)-1).reduce((a,c)=> a + c, 0) == digitArray.slice(Math.floor(digitArray.length/2)+1, digitArray.length).reduce((a,c)=> a + c, 0) ? "Balanced" : "Not Balanced";
+}
