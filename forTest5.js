@@ -371,7 +371,7 @@ function solution3(digits){
 console.log(solution3("12345678493219"));
  */
 
-
+/* 
 // Balanced number is the number that * The sum of all digits to the left of the middle digit(s) and the sum of all digits to the right of the middle digit(s) are equal*.
 // Task
 
@@ -384,3 +384,19 @@ function balancedNum(number)
     let digitArray = number.toString().split("").map(val => parseInt(val));
     return digitArray.slice(0, Math.ceil(digitArray.length/2)-1).reduce((a,c)=> a + c, 0) == digitArray.slice(Math.floor(digitArray.length/2)+1, digitArray.length).reduce((a,c)=> a + c, 0) ? "Balanced" : "Not Balanced";
 }
+ */
+
+// Jumping number is the number that All adjacent digits in it differ by 1.
+// Task
+
+// Given a number, Find if it is Jumping or not . 
+
+function jumpingNumber(n){
+    const arr = n.toString().split("").map(val => parseInt(val));
+    for(let i = 1; i < arr.length; i++){
+        if( Math.abs(arr[i]- arr[i-1]) !== 1){
+            return "Not!!";
+        }
+    }
+    return "Jumping!!";
+  }
