@@ -390,7 +390,7 @@ function balancedNum(number)
 // Task
 
 // Given a number, Find if it is Jumping or not . 
-
+/* 
 function jumpingNumber(n){
     const arr = n.toString().split("").map(val => parseInt(val));
     for(let i = 1; i < arr.length; i++){
@@ -400,3 +400,8 @@ function jumpingNumber(n){
     }
     return "Jumping!!";
   }
+ */
+
+// Given an 2D array of size m * n. Your task is to find the sum of minimum value in each row.
+
+const sumOfMinimums = arr => arr.reduce((a,c)=> a + Math.min(...c), 0);
