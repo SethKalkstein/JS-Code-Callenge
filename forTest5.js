@@ -401,7 +401,26 @@ function jumpingNumber(n){
     return "Jumping!!";
   }
  */
-
+/* 
 // Given an 2D array of size m * n. Your task is to find the sum of minimum value in each row.
 
 const sumOfMinimums = arr => arr.reduce((a,c)=> a + Math.min(...c), 0);
+ */
+
+// ###Task: You have to write a function pattern which returns the following Pattern(See Pattern & Examples) upto n number of rows.
+
+//     Note:Returning the pattern is not the same as Printing the pattern.
+
+// ####Rules/Note:
+
+//     If n < 1 then it should return "" i.e. empty string.
+//     There are no whitespaces in the pattern.
+
+pattern=n=>Array.from({length: n}, (_, i) => i+1).reduce((a,c,i)=>a+(i>0?"\n":"")+c.toString().repeat(c),"");
+
+//someones else's answer that I found clever
+pattern=n=>n<1?'':n<2?'1':pattern(n-1)+'\n'+(`${n}`.repeat(n))
+
+console.log(pattern(5))
+
+// pattern=n=>range(0, 4, 1)
