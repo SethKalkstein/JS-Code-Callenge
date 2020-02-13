@@ -406,7 +406,7 @@ function jumpingNumber(n){
 
 const sumOfMinimums = arr => arr.reduce((a,c)=> a + Math.min(...c), 0);
  */
-
+/* 
 // ###Task: You have to write a function pattern which returns the following Pattern(See Pattern & Examples) upto n number of rows.
 
 //     Note:Returning the pattern is not the same as Printing the pattern.
@@ -424,3 +424,61 @@ pattern=n=>n<1?'':n<2?'1':pattern(n-1)+'\n'+(`${n}`.repeat(n))
 console.log(pattern(5))
 
 // pattern=n=>range(0, 4, 1)
+
+ */
+
+// ⚠️ The world is in quarantine! There is a new pandemia that struggles mankind. Each continent is isolated from each other but infected people have spread before the warning. ⚠️
+
+// 🗺️ You would be given a map of the world in a type of string:
+
+// s = "01000000X000X011X0X"
+
+// "0" : uninfected
+
+// "1" : infected
+
+// "X" : ocean
+
+// ⚫ The virus can't spread in the other side of the ocean.
+
+// ⚫ If one person is infected every person in this continent gets infected too.
+
+// ⚫ Your task is to find the percentage of human population that got infected in the end.
+
+// ☑️ Return the percentage % of the total population that got infected.
+
+// ❗❗ The first and the last continent are not connected!
+
+// 💡 Example:
+
+//  start: map1 = "01000000X000X011X0X"
+//  end:   map1 = "11111111X000X111X0X"
+//  total = 15
+//  infected = 11
+//  percentage = 100*11/15 = 73.33333333333333
+
+function infected(s) {
+    s = s.split("");
+    let tempCounter = 0;
+    let infectedCounter = 0;
+    let fullCounter = 0;
+    let tempInfected = false;
+
+    for(let i = 0; i < s.length; i++){
+        if(s[i] == "X"){
+            infectedCounter += tempInfected ? tempCounter : 0;
+            tempCounter = 0;
+            tempInfected = false;
+        } else {
+            tempCounter++;
+            fullCounter++
+            if(s[i] == "1"){
+                tempInfected = true;
+            }
+        }
+    }
+
+    infectedCounter += tempInfected ? tempCounter : 0;
+    
+    return fullCounter ? 100* infectedCounter/fullCounter : 0;
+}
