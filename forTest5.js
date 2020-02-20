@@ -426,7 +426,7 @@ console.log(pattern(5))
 // pattern=n=>range(0, 4, 1)
 
  */
-
+/* 
 // ⚠️ The world is in quarantine! There is a new pandemia that struggles mankind. Each continent is isolated from each other but infected people have spread before the warning. ⚠️
 
 // 🗺️ You would be given a map of the world in a type of string:
@@ -482,3 +482,26 @@ function infected(s) {
     
     return fullCounter ? 100* infectedCounter/fullCounter : 0;
 }
+*/
+
+// The two oldest ages function/method needs to be completed. It should take an array of numbers as its argument and return the two highest numbers within the array. The returned value should be an array in the format [second oldest age, oldest age].
+
+// The order of the numbers passed in could be any order. The array will always include at least 2 items.
+
+//I'm gonna do this the lazy way
+twoOldestAges = ages => ages.sort((a, b)=>a-b).slice(-2);
+
+//fine... less lazy, faster computation, we can assume that negative age isn't a thing!
+function twoOldestAges2(ages){
+    let max = [0,0];
+    for(let i = 0; i < ages.length; i++){
+        if(ages[i] > max[1]){
+            max[1] = ages[i];
+        } else if (ages[i] > max[0]){
+            max[0] = ages[i];
+        }
+    }
+    return max;
+}
+
+console.log(twoOldestAges2([1, 2, 10, 8]));
