@@ -483,7 +483,7 @@ function infected(s) {
     return fullCounter ? 100* infectedCounter/fullCounter : 0;
 }
 */
-
+/* 
 // The two oldest ages function/method needs to be completed. It should take an array of numbers as its argument and return the two highest numbers within the array. The returned value should be an array in the format [second oldest age, oldest age].
 
 // The order of the numbers passed in could be any order. The array will always include at least 2 items.
@@ -505,3 +505,31 @@ function twoOldestAges2(ages){
 }
 
 console.log(twoOldestAges2([1, 2, 10, 8]));
+ */
+
+// Numbers ending with zeros are boring.
+
+// They might be fun in your world, but not here.
+
+// Get rid of them. Only the ending ones.
+
+function noBoringZeros2(n) {
+    let nArray = n.toString().split("");
+    for(let i = nArray.length - 1; i >= 0; i--){
+        if(nArray[i] == 0){
+            nArray.pop();
+        } else {
+            break;
+        }
+    }
+    return parseInt(nArray.join("")) || 0;
+  } 
+
+  function noBoringZeros(n){
+    while(n%10 == 0 && n != 0){
+        n /= 10;
+    }
+    return n;
+  }
+
+  console.log(noBoringZeros(-23400))
